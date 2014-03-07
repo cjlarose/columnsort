@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 // Classic bithack from http://graphics.stanford.edu/~seander/bithacks.html
 int power_of_two(int x) {
@@ -8,8 +9,7 @@ int power_of_two(int x) {
 
 // Returns k such that x = 2^k
 int log_base_2(unsigned int x) {
-    if (x == 0)
-        return 0;
+    assert(x != 0);
 
     int i = 0;
     for (; ; i++, x >>= 1)
