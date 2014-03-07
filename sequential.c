@@ -11,7 +11,7 @@ int log_base_2(unsigned int x) {
     if (x == 0)
         return 0;
 
-    int i;
+    int i = 0;
     for (; ; i++, x >>= 1)
         if (x & 1)
             break;
@@ -44,6 +44,7 @@ int main(int argc, char **argv) {
     success = parse_args(argc, argv, &n);
     if (!success)
         return 1;
+
     k = log_base_2(n);
 
     printf("n = %u, k = %d\n", n, k);
