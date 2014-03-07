@@ -40,13 +40,15 @@ int parse_args(int argc, char **argv, unsigned int *dest) {
 
 int main(int argc, char **argv) {
     unsigned int n;
-    int k, success;
+    int k, success, r, s;
     success = parse_args(argc, argv, &n);
     if (!success)
         return 1;
 
     k = log_base_2(n);
+    r = 1 << (k / 2 + k % 2);
+    s = 1 << k / 2;
 
-    printf("n = %u, k = %d\n", n, k);
+    printf("n = %u, k = %d,\n r = %d, s = %d\n", n, k, r, s);
     return 0;
 }
