@@ -24,13 +24,13 @@ void matrix_init(matrix_t *matrix, int m, int n) {
     int i;
     int *block = malloc(sizeof(int) * m * n);
     if (block == NULL) {
-        printf("Insufficient memory!\n");
+        fprintf(stderr, "Insufficient memory!\n");
         exit(1);
     }
 
     int **entries = malloc(n * sizeof(int *));
     if (entries == NULL) {
-        printf("Insufficient memory!\n");
+        fprintf(stderr, "Insufficient memory!\n");
         exit(1);
     }
     for (i = 0; i < n; i++) {
