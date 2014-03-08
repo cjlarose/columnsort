@@ -18,12 +18,10 @@ void transpose_column(matrix_t *src, matrix_t *dest, int j) {
 }
 
 void reverse_transpose_column(matrix_t *src, matrix_t *dest, int j) {
-    int m, n, i, start_col;
+    int m, n, i;
     m = src->m; n = src->n;
-    //start_col = i * (m / n);
-    start_col = 0;
     for (i = 0; i < m; i++)
-        matrix_set(dest, ((n * i) + j) % m, start_col + i / (m/n), matrix_get(src, i, j));
+        matrix_set(dest, ((n * i) + j) % m, i / (m/n), matrix_get(src, i, j));
 }
 
 #endif
