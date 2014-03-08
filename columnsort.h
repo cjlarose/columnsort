@@ -77,7 +77,7 @@ void reverse_transpose_column(matrix_t *src, matrix_t *dest, long j) {
     long m, n, i;
     m = src->m; n = src->n;
     for (i = 0; i < m; i++)
-        matrix_set(dest, ((n * i) + j) % m, i / (m/n), matrix_get(src, i, j));
+        matrix_set(dest, i % n * n + j, i / (m/n), matrix_get(src, i, j));
 }
 
 /*
@@ -90,7 +90,8 @@ void reverse_transpose_column(matrix_t *src, matrix_t *dest, long j) {
 void sort_column_shift(matrix_t *matrix, long j, long shift) {
     if (j == 0) {
         quicksort(matrix->_entries[0], 0, matrix->m - shift - 1);
-        quicksort(matrix->_entries[matrix->n - 1], matrix->m - shift, matrix->m - 1);
+        quicksort(matrix->_entries[matrix->n - 1], matrix->m - shift,
+            matrix->m - 1);
     } else
         quicksort(matrix->_entries[j] - shift, 0, matrix->m - 1);
 }
