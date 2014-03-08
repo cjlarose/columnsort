@@ -2,9 +2,10 @@
 #define _COLUMNSORT_H_
 
 #include "quicksort.h"
+#include "matrix.h"
 
-void sort_column(matrix_t *matrix, int i) {
-    //quicksort(matrix->entries[i], 0, matrix->n - 1);
+void sort_column(matrix_t *matrix, int j) {
+    quicksort(matrix->_entries[j], 0, matrix->m - 1);
 }
 
 void transpose_column(matrix_t *src, matrix_t *dest, int j) {

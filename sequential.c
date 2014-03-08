@@ -60,13 +60,11 @@ int main(int argc, char **argv) {
     matrix_print(&matrix);
 
     int j;
-    /*
     printf("SORT\n");
     for (j = 0; j < matrix.n; j++)
         sort_column(&matrix, j);
 
     matrix_print(&matrix);
-    */
 
     printf("TRANSPOSE\n");
     for (j = 0; j < matrix.n; j++)
