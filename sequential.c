@@ -60,6 +60,7 @@ int main(int argc, char **argv) {
     matrix_print(&matrix);
 
     int j;
+
     printf("SORT\n");
     for (j = 0; j < matrix.n; j++)
         sort_column(&matrix, j);
@@ -71,6 +72,24 @@ int main(int argc, char **argv) {
         transpose_column(&matrix, &matrix_2, j);
 
     matrix_print(&matrix_2);
+
+    printf("SORT\n");
+    for (j = 0; j < matrix.n; j++)
+        sort_column(&matrix_2, j);
+
+    matrix_print(&matrix_2);
+
+    printf("REVERSE TRANSPOSE\n");
+    for (j = 0; j < matrix.n; j++)
+        reverse_transpose_column(&matrix_2, &matrix, j);
+
+    matrix_print(&matrix);
+
+    printf("SORT\n");
+    for (j = 0; j < matrix.n; j++)
+        sort_column(&matrix, j);
+
+    matrix_print(&matrix);
 
     matrix_free(&matrix);
     matrix_free(&matrix_2);
