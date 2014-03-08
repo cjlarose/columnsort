@@ -11,31 +11,31 @@
  * row-order.
  */
 typedef struct {
-    int m;
-    int n;
-    int **_entries;
+    long m;
+    long n;
+    long **_entries;
     void *_block;
 } matrix_t;
 
 /*
  * Creates a new m x n integer matrix. Uses a single contiguous block of memory
  */
-void matrix_init(matrix_t *matrix, int m, int n) {
-    int i;
-    int *block = malloc(sizeof(int) * m * n);
+void matrix_init(matrix_t *matrix, long m, long n) {
+    long i;
+    long *block = malloc(sizeof(long) * m * n);
     if (block == NULL) {
         fprintf(stderr, "Insufficient memory!\n");
         exit(1);
     }
 
-    int **entries = malloc(n * sizeof(int *));
+    long **entries = malloc(n * sizeof(long *));
     if (entries == NULL) {
         fprintf(stderr, "Insufficient memory!\n");
         exit(1);
     }
     for (i = 0; i < n; i++) {
         entries[i] = &block[i * m];
-        printf("%d: %p\n", i, entries[i]);
+        printf("%ld: %p\n", i, entries[i]);
     }
 
     matrix->m = m;
@@ -55,7 +55,7 @@ void matrix_init(matrix_t *matrix, int m, int n) {
  * Given a matrix, fill its entries in with random values
  */
 void matrix_fill_random(matrix_t *matrix) {
-    int i, j, m, n;
+    long i, j, m, n;
     m = matrix->m;
     n = matrix->n;
     srand(time(NULL));
@@ -68,10 +68,10 @@ void matrix_fill_random(matrix_t *matrix) {
  * Print a matrix to stdout
  */
 void matrix_print(matrix_t *matrix) {
-    int i, j;
+    long i, j;
     for (i = 0; i < matrix->m; i++) {
         for (j = 0; j < matrix->n; j++)
-            printf("%10d ", matrix_get(matrix, i, j));
+            printf("%10ld ", matrix_get(matrix, i, j));
         printf("\n");
     }
 }

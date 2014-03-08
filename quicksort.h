@@ -5,15 +5,15 @@
  * In-place implementation of QuickSort from
  * http://en.wikipedia.org/wiki/Quicksort#In-place_version
  */
-int qs_partition(int *arr, int left, int right, int pivot_index) {
-    int pivot_value = arr[pivot_index];
+long qs_partition(long *arr, long left, long right, long pivot_index) {
+    long pivot_value = arr[pivot_index];
 
-    int tmp = arr[pivot_index];
+    long tmp = arr[pivot_index];
     arr[pivot_index] = arr[right];
     arr[right] = tmp;
 
-    int store_index = left;
-    int i;
+    long store_index = left;
+    long i;
     for (i = left; i < right; i++)
         if (arr[i] <= pivot_value) {
             tmp = arr[i];
@@ -29,8 +29,8 @@ int qs_partition(int *arr, int left, int right, int pivot_index) {
     return store_index;
 }
 
-void quicksort(int *arr, int left, int right) {
-    int pivot_index, pivot_new_index;
+void quicksort(long *arr, long left, long right) {
+    long pivot_index, pivot_new_index;
     if (left < right) {
         pivot_index = (left + right) / 2;
         pivot_new_index = qs_partition(arr, left, right, pivot_index);

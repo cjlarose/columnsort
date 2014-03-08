@@ -5,15 +5,16 @@
 #include "columnsort.h"
 
 int main(int argc, char **argv) {
-    unsigned int n;
-    int success, r, s;
+    unsigned long n;
+    int success;
+    long r, s;
     success = parse_args(argc, argv, &n);
     if (!success)
         return 1;
 
     get_matrix_size(n, &r, &s);
 
-    printf("n = %u, r = %d, s = %d\n", n, r, s);
+    printf("n = %lu, r = %ld, s = %ld\n", n, r, s);
 
     matrix_t matrix, matrix_2;
     matrix_init(&matrix, r, s);
@@ -22,7 +23,7 @@ int main(int argc, char **argv) {
     matrix_fill_random(&matrix);
     matrix_print(&matrix);
 
-    int j;
+    long j;
 
     printf("SORT\n");
     for (j = 0; j < matrix.n; j++)
