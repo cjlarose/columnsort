@@ -1,6 +1,7 @@
 #ifndef _MATRIX_H_
 #define _MATRIX_H_
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -22,8 +23,16 @@ typedef struct {
 void matrix_init(matrix_t *matrix, int m, int n) {
     int i;
     int *block = malloc(sizeof(int) * m * n);
+    if (block == NULL) {
+        printf("Insufficient memory!\n");
+        exit(1);
+    }
 
     int **entries = malloc(n * sizeof(int *));
+    if (entries == NULL) {
+        printf("Insufficient memory!\n");
+        exit(1);
+    }
     for (i = 0; i < n; i++) {
         entries[i] = &block[i * m];
         printf("%d: %p\n", i, entries[i]);
