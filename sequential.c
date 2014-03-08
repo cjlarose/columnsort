@@ -91,6 +91,12 @@ int main(int argc, char **argv) {
 
     matrix_print(&matrix);
 
+    printf("SHIFT SORT\n");
+    for (j = 0; j < matrix.n; j++)
+        sort_column_shift(&matrix, j, matrix.m / 2);
+
+    matrix_print(&matrix);
+
     matrix_free(&matrix);
     matrix_free(&matrix_2);
     return 0;
