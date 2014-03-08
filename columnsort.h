@@ -40,21 +40,8 @@ void sort_column_shift(matrix_t *matrix, int j, int shift) {
     if (j == 0) {
         quicksort(matrix->_entries[0], 0, matrix->m - shift - 1);
         quicksort(matrix->_entries[matrix->n - 1], matrix->m - shift, matrix->m - 1);
-        /*
-        int i = 0;
-        for (; i < matrix->m - shift; i++)
-            matrix_set(matrix, i, 0, 0xDEADBEEF);
-        for (i = matrix->m - shift; i < matrix->m; i++)
-            matrix_set(matrix, i, matrix->n - 1, 0xDEADBEEF);
-        */
-    } else {
+    } else
         quicksort(matrix->_entries[j] - shift, 0, matrix->m - 1);
-        /*
-        int i;
-        for (i = -shift; i < matrix->m - shift; i++)
-            matrix_set(matrix, i, j, j);
-        */
-    }
 }
 
 #endif
