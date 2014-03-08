@@ -51,7 +51,8 @@ int main(int argc, char **argv) {
 
     printf("n = %u, k = %d,\n r = %d, s = %d\n", n, k, r, s);
 
-    matrix_t *matrix = matrix_new_random(r, s);
+    matrix_t *matrix = matrix_new(r, s);
+    matrix_fill_random(matrix);
     matrix_print(matrix);
     return 0;
 }

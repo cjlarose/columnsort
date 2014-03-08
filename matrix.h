@@ -13,8 +13,8 @@ void matrix_init(matrix_t *matrix, int m, int n, int **entries) {
     matrix->entries = entries;
 }
 
-matrix_t *matrix_new_random(int m, int n) {
-    int i, r;
+matrix_t *matrix_new(int m, int n) {
+    int i;
     matrix_t *matrix = malloc(sizeof(matrix_t));
     int *block = malloc(sizeof(int) * m * n);
 
@@ -23,13 +23,18 @@ matrix_t *matrix_new_random(int m, int n) {
         entries[i] = &block[i * n];
         printf("%d: %p\n", i, entries[i]);
     }
-
-    srand(time(NULL));
-    for (i = 0; i < m * n; i++)
-        block[i] = rand();
-
     matrix_init(matrix, m, n, entries);
     return matrix;
+}
+
+void matrix_fill_random(matrix_t *matrix) {
+    int i, j, m, n;
+    m = matrix->m;
+    n = matrix->n;
+    srand(time(NULL));
+    for (i = 0; i < m; i++)
+        for (j = 0; j < n; j++)
+            matrix->entries[i][j] = rand();
 }
 
 void matrix_print(matrix_t *matrix) {
