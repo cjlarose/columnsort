@@ -44,6 +44,10 @@ void matrix_init(matrix_t *matrix, int m, int n) {
     matrix->_block = block;
 }
 
+/*
+ * Defines macros matrix_get and matrix_set which present an row-order matrix
+ * interface, but use a column-order matrix storage scheme.
+ */
 #define matrix_get(ptr, i, j) ((ptr)->_entries[j][i])
 #define matrix_set(ptr, i, j, val) ((ptr)->_entries[j][i] = (val))
 
