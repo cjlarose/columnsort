@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include "matrix.h"
 
 // Classic bithack from http://graphics.stanford.edu/~seander/bithacks.html
 int power_of_two(int x) {
@@ -29,14 +30,13 @@ int parse_args(int argc, char **argv, unsigned int *dest) {
     unsigned int n = atol(argv[1]);
 
     if (n <= 0 || !power_of_two(n)) {
-        fprintf(stderr, "n must be a power of 2 greater than 0\n");
+        fprintf(stderr, "n must be a power of 2 greater than or equal to 1\n");
         return 0;
     }
 
     *dest = n;
     return 1;
 }
-
 
 int main(int argc, char **argv) {
     unsigned int n;
@@ -50,5 +50,8 @@ int main(int argc, char **argv) {
     s = 1 << k / 2;
 
     printf("n = %u, k = %d,\n r = %d, s = %d\n", n, k, r, s);
+
+    matrix_t *matrix = matrix_new_random(r, s);
+    matrix_print(matrix);
     return 0;
 }
