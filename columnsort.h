@@ -77,7 +77,7 @@ void reverse_transpose_column(matrix_t *src, matrix_t *dest, long j) {
     long m, n, i;
     m = src->m; n = src->n;
     for (i = 0; i < m; i++)
-        matrix_set(dest, i % n * n + j, i / (m/n), matrix_get(src, i, j));
+        matrix_set(dest, ((n * i) + j) % m, i / (m/n), matrix_get(src, i, j));
 }
 
 /*
