@@ -40,7 +40,7 @@ void matrix_fill_random(matrix_t *matrix) {
     srand(time(NULL));
     for (i = 0; i < m; i++)
         for (j = 0; j < n; j++)
-            matrix->entries[i][j] = rand();
+            matrix->entries[i][j] = rand() % 100;
 }
 
 /*
