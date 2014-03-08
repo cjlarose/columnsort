@@ -4,12 +4,17 @@
 #include "quicksort.h"
 #include "matrix.h"
 
-// Classic bithack from http://graphics.stanford.edu/~seander/bithacks.html
+/*
+ * Determines if an integer is a power of two.
+ * Classic bithack from http://graphics.stanford.edu/~seander/bithacks.html
+ */
 int power_of_two(int x) {
     return (x != 0) && ((x & (x - 1)) == 0);
 }
 
-// Returns k such that x = 2^k
+/*
+ * Returns k such that x = 2^k
+ */
 int log_base_2(unsigned int x) {
     assert(x != 0);
 
@@ -39,6 +44,10 @@ int parse_args(int argc, char **argv, unsigned int *dest) {
     return 1;
 }
 
+/*
+ * Sets r and s to the dimensions of a matrix for sorting n integers satisfying
+ * the following constraints: r % s == 0, r >= 2(s-1)^2, and r - s is minimal.
+ */
 void get_matrix_size(unsigned int n, int *r, int *s) {
     int k = log_base_2(n);
     *r = 1 << (k / 2 + k % 2);
