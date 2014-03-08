@@ -3,16 +3,17 @@
 
 #include "quicksort.h"
 
-void sort_row(matrix_t *matrix, int i) {
-    quicksort(matrix->entries[i], 0, matrix->n - 1);
+void sort_column(matrix_t *matrix, int i) {
+    //quicksort(matrix->entries[i], 0, matrix->n - 1);
 }
 
-void transpose_row(matrix_t *src, matrix_t *dest, int i) {
-    int m, n, j, start_col;
+void transpose_column(matrix_t *src, matrix_t *dest, int j) {
+    int m, n, i, start_row;
     m = src->m; n = src->n;
-    start_col = i * (n / m);
-    for (j = 0; j < n; j++)
-        dest->entries[j % m][start_col + j / m] = src->entries[i][j];
+    start_row = j * (m / n);
+    for (i = 0; i < m; i++)
+        matrix_set(dest, start_row + i / n, i % n,
+            matrix_get(src, i, j));
 }
 
 #endif

@@ -53,22 +53,24 @@ int main(int argc, char **argv) {
     printf("n = %u, k = %d,\n r = %d, s = %d\n", n, k, r, s);
 
     matrix_t matrix, matrix_2;
-    matrix_init(&matrix, s, r);
-    matrix_init(&matrix_2, s, r);
+    matrix_init(&matrix, r, s);
+    matrix_init(&matrix_2, r, s);
 
     matrix_fill_random(&matrix);
     matrix_print(&matrix);
 
+    int j;
+    /*
     printf("SORT\n");
-    int i;
-    for (i = 0; i < matrix.m; i++)
-        sort_row(&matrix, i);
+    for (j = 0; j < matrix.n; j++)
+        sort_column(&matrix, j);
 
     matrix_print(&matrix);
+    */
 
     printf("TRANSPOSE\n");
-    for (i = 0; i < matrix.m; i++)
-        transpose_row(&matrix, &matrix_2, i);
+    for (j = 0; j < matrix.n; j++)
+        transpose_column(&matrix, &matrix_2, j);
 
     matrix_print(&matrix_2);
 
