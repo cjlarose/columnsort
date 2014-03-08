@@ -43,6 +43,7 @@ void get_matrix_size(unsigned int n, int *r, int *s) {
     int k = log_base_2(n);
     *r = 1 << (k / 2 + k % 2);
     *s = 1 << k / 2;
+    for (; *r < 2 * (*s-1) * (*s-1); *r <<= 1, *s >>= 1);
 }
 
 /*
