@@ -1,6 +1,9 @@
 #include <stdlib.h>
 #include <time.h>
 
+/*
+ * Matrix type. M rows and N columns of int entries.
+ */
 typedef struct {
     int m;
     int n;
@@ -13,6 +16,9 @@ void matrix_init(matrix_t *matrix, int m, int n, int **entries) {
     matrix->entries = entries;
 }
 
+/*
+ * Creates a new m x n integer matrix. Uses a single contiguous block of memory
+ */
 matrix_t *matrix_new(int m, int n) {
     int i;
     matrix_t *matrix = malloc(sizeof(matrix_t));
@@ -27,6 +33,9 @@ matrix_t *matrix_new(int m, int n) {
     return matrix;
 }
 
+/*
+ * Given a matrix, fill its entries in with random values
+ */
 void matrix_fill_random(matrix_t *matrix) {
     int i, j, m, n;
     m = matrix->m;
@@ -37,6 +46,9 @@ void matrix_fill_random(matrix_t *matrix) {
             matrix->entries[i][j] = rand();
 }
 
+/*
+ * Print a matrix to stdout
+ */
 void matrix_print(matrix_t *matrix) {
     int i, j;
     for (i = 0; i < matrix->m; i++) {
