@@ -8,20 +8,14 @@ typedef struct {
     int m;
     int n;
     int **entries;
+    void *_block;
 } matrix_t;
-
-void matrix_init(matrix_t *matrix, int m, int n, int **entries) {
-    matrix->m = m;
-    matrix->n = n;
-    matrix->entries = entries;
-}
 
 /*
  * Creates a new m x n integer matrix. Uses a single contiguous block of memory
  */
-matrix_t *matrix_new(int m, int n) {
+void matrix_init(matrix_t *matrix, int m, int n) {
     int i;
-    matrix_t *matrix = malloc(sizeof(matrix_t));
     int *block = malloc(sizeof(int) * m * n);
 
     int **entries = malloc(m * sizeof(int *));
@@ -29,8 +23,11 @@ matrix_t *matrix_new(int m, int n) {
         entries[i] = &block[i * n];
         printf("%d: %p\n", i, entries[i]);
     }
-    matrix_init(matrix, m, n, entries);
-    return matrix;
+
+    matrix->m = m;
+    matrix->n = n;
+    matrix->entries = entries;
+    matrix->_block = block;
 }
 
 /*
@@ -56,4 +53,9 @@ void matrix_print(matrix_t *matrix) {
             printf("%10d ", matrix->entries[i][j]);
         printf("\n");
     }
+}
+
+void matrix_free(matrix_t *matrix) {
+    free(matrix->entries);
+    free(matrix->_block);
 }
