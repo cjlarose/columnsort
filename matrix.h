@@ -1,3 +1,6 @@
+#ifndef _MATRIX_H_
+#define _MATRIX_H_
+
 #include <stdlib.h>
 #include <time.h>
 
@@ -59,3 +62,5 @@ void matrix_free(matrix_t *matrix) {
     free(matrix->entries);
     free(matrix->_block);
 }
+
+#endif

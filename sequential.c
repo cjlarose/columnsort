@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "matrix.h"
-#include "quicksort.h"
+#include "columnsort.h"
 
 // Classic bithack from http://graphics.stanford.edu/~seander/bithacks.html
 int power_of_two(int x) {
@@ -37,10 +37,6 @@ int parse_args(int argc, char **argv, unsigned int *dest) {
 
     *dest = n;
     return 1;
-}
-
-void sort_row(matrix_t *matrix, int i) {
-    quicksort(matrix->entries[i], 0, matrix->n - 1);
 }
 
 int main(int argc, char **argv) {

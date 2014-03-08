@@ -1,3 +1,6 @@
+#ifndef _QUICKSORT_H_
+#define _QUICKSORT_H_
+
 /*
  * In-place implementation of QuickSort from
  * http://en.wikipedia.org/wiki/Quicksort#In-place_version
@@ -35,3 +38,5 @@ void quicksort(int *arr, int left, int right) {
         quicksort(arr, pivot_new_index + 1, right);
     }
 }
+
+#endif
