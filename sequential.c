@@ -52,8 +52,10 @@ int main(int argc, char **argv) {
 
     printf("n = %u, k = %d,\n r = %d, s = %d\n", n, k, r, s);
 
-    matrix_t matrix;
-    matrix_init(&matrix, r, s);
+    matrix_t matrix, matrix_2;
+    matrix_init(&matrix, s, r);
+    matrix_init(&matrix_2, s, r);
+
     matrix_fill_random(&matrix);
     matrix_print(&matrix);
 
@@ -64,6 +66,13 @@ int main(int argc, char **argv) {
 
     matrix_print(&matrix);
 
+    printf("TRANSPOSE\n");
+    for (i = 0; i < matrix.m; i++)
+        transpose_row(&matrix, &matrix_2, i);
+
+    matrix_print(&matrix_2);
+
     matrix_free(&matrix);
+    matrix_free(&matrix_2);
     return 0;
 }
