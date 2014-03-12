@@ -7,23 +7,19 @@ Matrix::Matrix(long m, long n)
 {
 }
 
-long& Matrix::operator()(long i, long j) const
-{
+long& Matrix::operator()(long i, long j) const {
     return elements[n*j + i];
 }
 
-long Matrix::rows() const
-{
+long Matrix::rows() const {
     return m;
 }
 
-long Matrix::columns() const
-{
+long Matrix::columns() const {
     return n;
 }
 
-std::ostream& operator<<(std::ostream &strm, const Matrix& matrix)
-{
+std::ostream& operator<<(std::ostream &strm, const Matrix& matrix) {
     for (int i = 0; i < matrix.rows(); ++i) {
         for (int j = 0; j < matrix.columns(); ++j)
             strm << std::setw(11) << matrix(i, j);
@@ -33,8 +29,7 @@ std::ostream& operator<<(std::ostream &strm, const Matrix& matrix)
     return strm;
 }
 
-std::istream& operator>>(std::istream &in, const Matrix& matrix)
-{
+std::istream& operator>>(std::istream &in, const Matrix& matrix) {
     for (int i = 0; i < matrix.rows(); ++i)
         for (int j = 0; j < matrix.columns(); ++j)
             in >> matrix(i, j);
