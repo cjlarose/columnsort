@@ -1,3 +1,6 @@
+#ifndef _MATRIX_H_
+#define _MATRIX_H_
+
 class Matrix {
     public:
         Matrix(long m, long n);
@@ -16,3 +19,5 @@ class Matrix {
 
 std::ostream& operator<<(std::ostream &strm, const Matrix& matrix);
 std::istream& operator>>(std::istream &in, const Matrix& matrix);
+
+#endif
