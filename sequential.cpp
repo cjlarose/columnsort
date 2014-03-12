@@ -1,7 +1,15 @@
 #include <iostream>
 #include <fstream>
-#include "columnsort.h"
-#include "matrix.h"
+#include <cstdlib>
+#include "column_sorter.h"
+
+/*
+ * Determines if an integer is a power of two.
+ * Classic bithack from http://graphics.stanford.edu/~seander/bithacks.html
+ */
+int power_of_two(long x) {
+    return (x != 0) && ((x & (x - 1)) == 0);
+}
 
 /*
  * seq-sort 128 foobar 0 1
@@ -48,18 +56,15 @@ int main(int argc, char * argv[]) {
         &print_output))
         return 1;
 
-    get_matrix_size(n, &r, &s);
 
-    std::cout << "n = " << n << ", r = " << r << ", s = " << s << std::endl;
-
-    Matrix m(r, s);
+    ColumnSorter cs(n);
 
     std::ifstream input_file;
     input_file.open(filename);
-    input_file >> m;
+    input_file >> cs;
     input_file.close();
 
-    std::cout << m;
+    std::cout << cs;
 
     return 0;
 }
