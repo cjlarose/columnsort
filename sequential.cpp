@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "columnsort.h"
 #include "matrix.h"
 
@@ -15,7 +16,14 @@ int main(int argc, char * argv[]) {
 
     std::cout << "n = " << n << ", r = " << r << ", s = " << s << std::endl;
 
-    //Matrix m(r, s);
+    Matrix m(r, s);
+
+    std::ifstream input_file;
+    input_file.open(filename);
+    input_file >> m;
+    input_file.close();
+
+    std::cout << m;
 
     return 0;
 }

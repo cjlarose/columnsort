@@ -12,3 +12,4 @@ class Matrix {
 };
 
 std::ostream& operator<<(std::ostream &strm, const Matrix& matrix);
+std::istream& operator>>(std::istream &in, const Matrix& matrix);
