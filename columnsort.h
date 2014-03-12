@@ -1,6 +1,7 @@
 #ifndef _COLUMNSORT_H_
 #define _COLUMNSORT_H_
 
+#include <assert.h>
 #include "quicksort.h"
 #include "matrix.h"
 
@@ -25,11 +26,11 @@ int log_base_2(unsigned long x) {
     return i;
 }
 
-int parse_args(int argc, char **argv, unsigned long *dest) {
+void parse_args(int argc, char **argv, unsigned long *num_items, long *num_threads) {
 
     if (argc < 2) {
         fprintf(stderr, "Usage: seq-sum n\n");
-        return 0;
+        exit(1);
     }
 
     // with an unsigned long, we can accept arguments up to 2^31
@@ -37,11 +38,13 @@ int parse_args(int argc, char **argv, unsigned long *dest) {
 
     if (n <= 0 || !power_of_two(n)) {
         fprintf(stderr, "n must be a power of 2 greater than or equal to 1\n");
-        return 0;
+        exit(1);
     }
 
-    *dest = n;
-    return 1;
+    *num_items = n;
+
+    if (num_threads != NULL && argc >= 3)
+        *num_threads = atol(argv[2]);
 }
 
 /*

@@ -6,11 +6,8 @@
 
 int main(int argc, char **argv) {
     unsigned long n;
-    int success;
     long r, s;
-    success = parse_args(argc, argv, &n);
-    if (!success)
-        return 1;
+    parse_args(argc, argv, &n, NULL);
 
     get_matrix_size(n, &r, &s);
 
