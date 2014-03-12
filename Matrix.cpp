@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "Matrix.h"
 
 Matrix::Matrix(long m, long n)
@@ -6,7 +7,7 @@ Matrix::Matrix(long m, long n)
 {
 }
 
-long& Matrix::operator()(long i, long j)
+long& Matrix::operator()(long i, long j) const
 {
     return elements[n*j + i];
 }
@@ -23,5 +24,11 @@ long Matrix::columns() const
 
 std::ostream& operator<<(std::ostream &strm, const Matrix& matrix)
 {
-    return strm << "Matrix(" << matrix.rows() << " x " << matrix.columns() << ")";
+    for (int i = 0; i < matrix.rows(); ++i) {
+        for (int j = 0; j < matrix.columns(); ++j)
+            strm << std::setw(10) << matrix(i, j);
+        strm << "\n";
+    }
+
+    return strm;
 }
