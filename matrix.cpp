@@ -8,7 +8,7 @@ Matrix::Matrix(long m, long n)
 }
 
 long& Matrix::operator()(long i, long j) const {
-    return elements[n*j + i];
+    return elements[m*j + i];
 }
 
 long Matrix::rows() const {
@@ -30,8 +30,8 @@ std::ostream& operator<<(std::ostream &strm, const Matrix& matrix) {
 }
 
 std::istream& operator>>(std::istream &in, const Matrix& matrix) {
-    for (int i = 0; i < matrix.rows(); ++i)
-        for (int j = 0; j < matrix.columns(); ++j)
+    for (int j = 0; j < matrix.columns(); ++j)
+        for (int i = 0; i < matrix.rows(); ++i)
             in >> matrix(i, j);
     return in;
 }
