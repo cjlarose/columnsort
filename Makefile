@@ -19,7 +19,7 @@ seq-sort: $(OBJECTS) $(BUILD_DIR)/seq_column_sorter.o main.cpp
 	$(CC) $(CFLAGS) -DSEQUENTIAL -o $@ $^
 
 par-sort: $(OBJECTS) $(BUILD_DIR)/par_column_sorter.o main.cpp
-	$(CC) $(CFLAGS) -DPARALLEL -o $@ $^
+	$(CC) $(CFLAGS) -pthread -DPARALLEL -o $@ $^
 
 generate-testcase: generate_testcase.cpp
 	$(CC) $(CFLAGS) -o $@ $^
