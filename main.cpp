@@ -2,7 +2,6 @@
 #include <fstream>
 #include <cstdlib>
 #include <cassert>
-#include "column_sorter.h"
 #include "seq_column_sorter.h"
 
 /*
@@ -79,7 +78,9 @@ int main(int argc, char * argv[]) {
     long s = 1 << k / 2;
     for (; r < 2 * (s-1) * (s-1); r <<= 1, s >>= 1);
 
+    #if SEQUENTIAL
     SeqColumnSorter cs(r, s);
+    #endif
 
     std::ifstream input_file;
     input_file.open(filename);
