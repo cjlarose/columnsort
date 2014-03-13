@@ -15,11 +15,11 @@ directories:
 $(BUILD_DIR)/%.o: %.cpp
 	$(CC) $(CFLAGS) -c -o $@ $^
 
-seq-sort: $(OBJECTS) $(BUILD_DIR)/seq_column_sorter.o
-	$(CC) $(CFLAGS) -DSEQUENTIAL -o $@ $^ main.cpp
+seq-sort: $(OBJECTS) $(BUILD_DIR)/seq_column_sorter.o main.cpp
+	$(CC) $(CFLAGS) -DSEQUENTIAL -o $@ $^
 
-par-sort: $(OBJECTS) $(BUILD_DIR)/par_column_sorter.o
-	$(CC) $(CFLAGS) -DPARALLEL -o $@ $^ main.cpp
+par-sort: $(OBJECTS) $(BUILD_DIR)/par_column_sorter.o main.cpp
+	$(CC) $(CFLAGS) -DPARALLEL -o $@ $^
 
 generate-testcase: generate_testcase.cpp
 	$(CC) $(CFLAGS) -o $@ $^
