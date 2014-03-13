@@ -74,7 +74,6 @@ int main(int argc, char * argv[]) {
     long s = 1 << k / 2;
     for (; r < 2 * (s-1) * (s-1); r <<= 1, s >>= 1);
 
-    std::cout << "n = " << n << ", r = " << r << ", s = " << s << std::endl;
     ColumnSorter cs(r, s);
 
     std::ifstream input_file;
@@ -84,7 +83,8 @@ int main(int argc, char * argv[]) {
 
     cs.sort();
 
-    std::cout << cs;
+    if (print_output)
+        std::cout << cs;
 
     return 0;
 }
