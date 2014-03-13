@@ -4,3 +4,5 @@ par-sort
 *.un~
 testcases
 build
+gmon.out
+generate-testcase

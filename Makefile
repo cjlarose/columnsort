@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-O2
+CFLAGS=-O2 -pg
 
 BUILD_DIR=build
 SOURCES=column_sorter.cpp matrix.cpp main.cpp
@@ -16,6 +16,9 @@ $(BUILD_DIR)/%.o: %.cpp
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 seq-sort: $(OBJECTS)
+	$(CC) $(CFLAGS) -o $@ $^
+
+generate-testcase: generate_testcase.cpp
 	$(CC) $(CFLAGS) -o $@ $^
 
 .PHONY: clean
