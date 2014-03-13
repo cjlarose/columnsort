@@ -26,7 +26,7 @@ void ParColumnSorter::sort() {
     worker_message_t message = {left, right, 0, s};
     std::thread sorter(worker, &message);
     */
-    std::thread sorter(worker, left, right, 0, s);
+    std::thread sorter(&ParColumnSorter::worker, std::ref(left), std::ref(right), 0, s);
 
     sorter.join();
 }
