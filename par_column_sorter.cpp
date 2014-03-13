@@ -15,7 +15,8 @@ void ParColumnSorter::worker(worker_message_t* message) {
         message->left.sort_column(j);
 }
 */
-void worker(Matrix& left, Matrix& right, long start, long end) {
+void ParColumnSorter::worker(Matrix& left, Matrix& right, long start, 
+    long end) {
     for (long j = start; j < end; ++j)
         left.sort_column(j);
 }
