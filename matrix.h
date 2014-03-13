@@ -4,6 +4,7 @@
 class Matrix {
     public:
         Matrix(long m, long n);
+        ~Matrix();
         long& operator() (long i, long j) const;
         long rows() const;
         long columns() const;

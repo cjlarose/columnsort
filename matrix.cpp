@@ -9,6 +9,10 @@ Matrix::Matrix(long m, long n)
 {
 }
 
+Matrix::~Matrix() {
+    delete[] elements;
+}
+
 long& Matrix::operator()(long i, long j) const {
     return at(i, j);
 }
