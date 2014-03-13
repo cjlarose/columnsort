@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cassert>
 #include "seq_column_sorter.h"
+#include "par_column_sorter.h"
 
 /*
  * Determines if an integer is a power of two.
@@ -80,6 +81,8 @@ int main(int argc, char * argv[]) {
 
     #if SEQUENTIAL
     SeqColumnSorter cs(r, s);
+    #else
+    ParColumnSorter cs(r, s);
     #endif
 
     std::ifstream input_file;

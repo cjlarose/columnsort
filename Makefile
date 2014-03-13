@@ -6,7 +6,7 @@ SOURCES=column_sorter.cpp matrix.cpp
 OBJECTS=$(patsubst %.cpp, $(BUILD_DIR)/%.o, $(SOURCES))
 
 .PHONY: all
-all: directories seq-sort
+all: directories seq-sort par-sort
 
 .PHONY: directories
 directories:
@@ -18,10 +18,13 @@ $(BUILD_DIR)/%.o: %.cpp
 seq-sort: $(OBJECTS) $(BUILD_DIR)/seq_column_sorter.o
 	$(CC) $(CFLAGS) -DSEQUENTIAL -o $@ $^ main.cpp
 
+par-sort: $(OBJECTS) $(BUILD_DIR)/par_column_sorter.o
+	$(CC) $(CFLAGS) -DPARALLEL -o $@ $^ main.cpp
+
 generate-testcase: generate_testcase.cpp
 	$(CC) $(CFLAGS) -o $@ $^
 
 .PHONY: clean
 clean:
 	rm -rf $(BUILD_DIR)
-	rm -f generate-testcase seq-sort
+	rm -f generate-testcase seq-sort par-sort
