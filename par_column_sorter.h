@@ -5,8 +5,10 @@
 
 class ParColumnSorter: public ColumnSorter {
     public:
-        ParColumnSorter(long r, long s);
+        ParColumnSorter(long r, long s, int p);
         void sort();
+    private:
+        int p;
 };
 
 #endif

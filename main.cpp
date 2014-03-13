@@ -82,7 +82,7 @@ int main(int argc, char * argv[]) {
     #if SEQUENTIAL
     SeqColumnSorter cs(r, s);
     #else
-    ParColumnSorter cs(r, s);
+    ParColumnSorter cs(r, s, 4);
     #endif
 
     std::ifstream input_file;
