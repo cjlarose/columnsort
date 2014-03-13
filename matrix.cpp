@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <cassert>
 #include "quicksort.h"
 #include "matrix.h"
 
@@ -9,6 +10,12 @@ Matrix::Matrix(long m, long n)
 }
 
 long& Matrix::operator()(long i, long j) const {
+    return at(i, j);
+}
+
+long& Matrix::at(long i, long j) const {
+    assert(i < m);
+    assert(j < n);
     return elements[m*j + i];
 }
 
@@ -42,18 +49,18 @@ std::istream& operator>>(std::istream &in, const Matrix& matrix) {
  * sorting the ith row.
  */
 void Matrix::sort_column(long j) {
-    quicksort(&elements[j], 0, m - 1);
+    quicksort(&elements[j*m], 0, m - 1);
 }
 
 void Matrix::transpose_column(Matrix& dest, long j) {
     long start_row = j * (m / n);
     for (long i = 0; i < m; ++i)
-        dest(start_row + i / n, i % n) = (i, j);
+        dest(start_row + i / n, i % n) = at(i, j);
 }
 
 void Matrix::reverse_transpose_column(Matrix& dest, long j) {
     for (long i = 0; i < m; i++)
-        dest( ((n * i) + j) % m, i / (m/n) ) = (i, j);
+        dest( ((n * i) + j) % m, i / (m/n) ) = at(i, j);
 }
 
 /*
@@ -66,7 +73,7 @@ void Matrix::reverse_transpose_column(Matrix& dest, long j) {
 void Matrix::sort_column_shift(long j, long shift) {
     if (j == 0) {
         quicksort(&elements[0], 0, m - shift - 1);
-        quicksort(&elements[n - 1], m - shift, m - 1);
+        quicksort(&elements[n*m - 1], m - shift, m - 1);
     } else
-        quicksort(&elements[j] - shift, 0, m - 1);
+        quicksort(&elements[j*m] - shift, 0, m - 1);
 }

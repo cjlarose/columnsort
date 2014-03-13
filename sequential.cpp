@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <cassert>
 #include "column_sorter.h"
 
 /*
@@ -9,6 +10,19 @@
  */
 int power_of_two(long x) {
     return (x != 0) && ((x & (x - 1)) == 0);
+}
+
+/*
+ * Returns k such that x = 2^k
+ */
+int log_base_2(unsigned long x) {
+    assert(x != 0);
+
+    int i = 0;
+    for (; ; i++, x >>= 1)
+        if (x & 1)
+            break;
+    return i;
 }
 
 /*
@@ -49,20 +63,26 @@ int parse_args(int argc, char **argv, unsigned long *num_items,
 
 int main(int argc, char * argv[]) {
     unsigned long n;
-    long r, s;
     bool print_time, print_output;
     char *filename;
     if (!parse_args(argc, argv, &n, NULL, &filename, &print_time,
         &print_output))
         return 1;
 
+    int k = log_base_2(n);
+    long r = 1 << (k / 2 + k % 2);
+    long s = 1 << k / 2;
+    for (; r < 2 * (s-1) * (s-1); r <<= 1, s >>= 1);
 
-    ColumnSorter cs(n);
+    std::cout << "n = " << n << ", r = " << r << ", s = " << s << std::endl;
+    ColumnSorter cs(r, s);
 
     std::ifstream input_file;
     input_file.open(filename);
     input_file >> cs;
     input_file.close();
+
+    cs.sort();
 
     std::cout << cs;
 
