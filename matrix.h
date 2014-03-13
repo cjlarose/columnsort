@@ -14,6 +14,7 @@ class Matrix {
         void reverse_transpose_column(Matrix& dest, long j);
     private:
         long& at(long i, long j) const;
+        long** cols;
         long* elements;
         long m;
         long n;

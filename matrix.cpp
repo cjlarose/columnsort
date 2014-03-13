@@ -9,6 +9,9 @@ Matrix::Matrix(long m, long n)
     :m(m), n(n) {
     try {
         elements = new long[m * n];
+        cols = new long*[n];
+        for (int j = 0; j < n; j++)
+            cols[j] = &elements[m*j];
     } catch (std::bad_alloc& ba) {
         std::cerr << "Insufficient memory!" << ba.what() << "\n";
         std::exit(1);
@@ -17,6 +20,7 @@ Matrix::Matrix(long m, long n)
 
 Matrix::~Matrix() {
     delete[] elements;
+    delete[] cols;
 }
 
 long& Matrix::operator()(long i, long j) const {
@@ -26,7 +30,7 @@ long& Matrix::operator()(long i, long j) const {
 long& Matrix::at(long i, long j) const {
     assert(i < m);
     assert(j < n);
-    return elements[m*j + i];
+    return *(cols[j] + i);
 }
 
 long Matrix::rows() const {
@@ -59,7 +63,7 @@ std::istream& operator>>(std::istream &in, const Matrix& matrix) {
  * sorting the ith row.
  */
 void Matrix::sort_column(long j) {
-    quicksort(&elements[j*m], 0, m - 1);
+    quicksort(cols[j], 0, m - 1);
 }
 
 void Matrix::transpose_column(Matrix& dest, long j) {
@@ -82,8 +86,8 @@ void Matrix::reverse_transpose_column(Matrix& dest, long j) {
  */
 void Matrix::sort_column_shift(long j, long shift) {
     if (j == 0) {
-        quicksort(&elements[0], 0, m - shift - 1);
-        quicksort(&elements[(n - 1)*m], m - shift, m - 1);
+        quicksort(cols[0], 0, m - shift - 1);
+        quicksort(cols[n - 1], m - shift, m - 1);
     } else
-        quicksort(&elements[j*m] - shift, 0, m - 1);
+        quicksort(cols[j] - shift, 0, m - 1);
 }
