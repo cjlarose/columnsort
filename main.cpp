@@ -31,7 +31,7 @@ int log_base_2(unsigned long x) {
  * par-sort 128 4 foobar 0 1
  */
 int parse_args(int argc, char **argv, unsigned long *num_items,
-    long *num_threads, char **filename, bool *print_time, bool *print_output) {
+    int *num_threads, char **filename, bool *print_time, bool *print_output) {
 
     if (num_threads == NULL && argc < 5) {
         std::cerr << "Usage: " << argv[0] << " n filename print_time print_output" << std::endl;
@@ -70,8 +70,15 @@ int main(int argc, char * argv[]) {
     unsigned long n;
     bool print_time, print_output;
     char *filename;
+
+    #if SEQUENTIAL
     if (!parse_args(argc, argv, &n, NULL, &filename, &print_time,
         &print_output))
+    #else
+    int p;
+    if (!parse_args(argc, argv, &n, &p, &filename, &print_time,
+        &print_output))
+    #endif
         return 1;
 
     int k = log_base_2(n);
@@ -82,7 +89,7 @@ int main(int argc, char * argv[]) {
     #if SEQUENTIAL
     SeqColumnSorter cs(r, s);
     #else
-    ParColumnSorter cs(r, s, 4);
+    ParColumnSorter cs(r, s, p);
     #endif
 
     std::ifstream input_file;
