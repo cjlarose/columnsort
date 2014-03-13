@@ -1,12 +1,18 @@
 #include <iostream>
 #include <iomanip>
 #include <cassert>
+#include <cstdlib>
 #include "quicksort.h"
 #include "matrix.h"
 
 Matrix::Matrix(long m, long n)
-    :elements(new long[m * n]), m(m), n(n)
-{
+    :m(m), n(n) {
+    try {
+        elements = new long[m * n];
+    } catch (std::bad_alloc& ba) {
+        std::cerr << "Insufficient memory!" << ba.what() << "\n";
+        std::exit(1);
+    }
 }
 
 Matrix::~Matrix() {
