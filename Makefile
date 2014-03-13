@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-O2 -pg
+CFLAGS=-O2
 
 BUILD_DIR=build
 SOURCES=column_sorter.cpp matrix.cpp main.cpp
