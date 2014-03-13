@@ -5,7 +5,7 @@
 #include "matrix.h"
 
 Matrix::Matrix(long m, long n)
-    :elements{new long[m * n]}, m{m}, n{n}
+    :elements(new long[m * n]), m(m), n(n)
 {
 }
 

@@ -7,7 +7,7 @@
  * the following constraints: r % s == 0, r >= 2(s-1)^2, and r - s is minimal.
  */
 ColumnSorter::ColumnSorter(long r, long s)
-    :left(Matrix(r, s)), right(Matrix(r, s)), r{r}, s{s} {
+    :left(Matrix(r, s)), right(Matrix(r, s)), r(r), s(s) {
 }
 
 std::ostream& operator<<(std::ostream& strm, const ColumnSorter& cs) {
