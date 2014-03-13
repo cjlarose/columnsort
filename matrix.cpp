@@ -83,7 +83,7 @@ void Matrix::reverse_transpose_column(Matrix& dest, long j) {
 void Matrix::sort_column_shift(long j, long shift) {
     if (j == 0) {
         quicksort(&elements[0], 0, m - shift - 1);
-        quicksort(&elements[n*m - 1], m - shift, m - 1);
+        quicksort(&elements[(n - 1)*m], m - shift, m - 1);
     } else
         quicksort(&elements[j*m] - shift, 0, m - 1);
 }
