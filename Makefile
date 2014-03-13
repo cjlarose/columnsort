@@ -24,4 +24,4 @@ generate-testcase: generate_testcase.cpp
 .PHONY: clean
 clean:
 	rm -rf $(BUILD_DIR)
-	rm -f seq-sort
+	rm -f generate-testcase seq-sort
