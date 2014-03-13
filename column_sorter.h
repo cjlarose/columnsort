@@ -5,12 +5,12 @@
 
 class ColumnSorter {
     public:
-        ColumnSorter(long m, long n);
-        void sort();
+        virtual void sort() = 0;
         friend std::ostream& operator<<(std::ostream& strm, const ColumnSorter& cs);
         friend std::istream& operator>>(std::istream& strm, const ColumnSorter& cs);
-    private:
-        const long r, s;
+    protected:
+        ColumnSorter(long r, long s);
+        long r, s;
         Matrix left;
         Matrix right;
 };

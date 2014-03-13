@@ -15,7 +15,7 @@ directories:
 $(BUILD_DIR)/%.o: %.cpp
 	$(CC) $(CFLAGS) -c -o $@ $^
 
-seq-sort: $(OBJECTS)
+seq-sort: $(OBJECTS) $(BUILD_DIR)/seq_column_sorter.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 generate-testcase: generate_testcase.cpp

@@ -1,6 +1,8 @@
 #ifndef _MATRIX_H_
 #define _MATRIX_H_
 
+#include <iostream>
+
 class Matrix {
     public:
         Matrix(long m, long n);

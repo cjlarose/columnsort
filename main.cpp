@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <cassert>
 #include "column_sorter.h"
+#include "seq_column_sorter.h"
 
 /*
  * Determines if an integer is a power of two.
@@ -61,6 +62,10 @@ int parse_args(int argc, char **argv, unsigned long *num_items,
 }
 
 
+/*
+ * Sets r and s to the dimensions of a matrix for sorting n integers satisfying
+ * the following constraints: r % s == 0, r >= 2(s-1)^2, and r - s is minimal.
+ */
 int main(int argc, char * argv[]) {
     unsigned long n;
     bool print_time, print_output;
@@ -74,7 +79,7 @@ int main(int argc, char * argv[]) {
     long s = 1 << k / 2;
     for (; r < 2 * (s-1) * (s-1); r <<= 1, s >>= 1);
 
-    ColumnSorter cs(r, s);
+    SeqColumnSorter cs(r, s);
 
     std::ifstream input_file;
     input_file.open(filename);
