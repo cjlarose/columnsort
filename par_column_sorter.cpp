@@ -3,8 +3,8 @@
 #include "par_column_sorter.h"
 #include "matrix.h"
 
-ParColumnSorter::ParColumnSorter(long r, long s, int p)
-    :ColumnSorter(r, s), p(p) {
+ParColumnSorter::ParColumnSorter(long n, int p)
+    :ColumnSorter(n), p(p) {
     if (p > s)
         p = s;
 }

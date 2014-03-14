@@ -5,8 +5,9 @@
 #include "quicksort.h"
 #include "matrix.h"
 
-Matrix::Matrix(long m, long n)
-    :m(m), n(n) {
+void Matrix::init(long num_rows, long num_cols) {
+    m = num_rows;
+    n = num_cols;
     try {
         elements = new long[m * n];
         cols = new long*[n];

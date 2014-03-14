@@ -5,7 +5,7 @@
 
 class SeqColumnSorter: public ColumnSorter {
     public:
-        SeqColumnSorter(long r, long s);
+        SeqColumnSorter(long n);
         void sort();
 };
 

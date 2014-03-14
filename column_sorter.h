@@ -9,7 +9,7 @@ class ColumnSorter {
         friend std::ostream& operator<<(std::ostream& strm, const ColumnSorter& cs);
         friend std::istream& operator>>(std::istream& strm, const ColumnSorter& cs);
     protected:
-        ColumnSorter(long r, long s);
+        ColumnSorter(long n);
         long r, s;
         Matrix left;
         Matrix right;

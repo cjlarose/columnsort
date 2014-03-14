@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-#include <cassert>
 #include "seq_column_sorter.h"
 #include "par_column_sorter.h"
 
@@ -11,19 +10,6 @@
  */
 int power_of_two(long x) {
     return (x != 0) && ((x & (x - 1)) == 0);
-}
-
-/*
- * Returns k such that x = 2^k
- */
-int log_base_2(unsigned long x) {
-    assert(x != 0);
-
-    int i = 0;
-    for (; ; i++, x >>= 1)
-        if (x & 1)
-            break;
-    return i;
 }
 
 /*
@@ -81,15 +67,10 @@ int main(int argc, char * argv[]) {
     #endif
         return 1;
 
-    int k = log_base_2(n);
-    long r = 1 << (k / 2 + k % 2);
-    long s = 1 << k / 2;
-    for (; r < 2 * (s-1) * (s-1); r <<= 1, s >>= 1);
-
     #if SEQUENTIAL
-    SeqColumnSorter cs(r, s);
+    SeqColumnSorter cs(n);
     #else
-    ParColumnSorter cs(r, s, p);
+    ParColumnSorter cs(n, p);
     #endif
 
     std::ifstream input_file;
