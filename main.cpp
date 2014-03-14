@@ -52,25 +52,26 @@ int parse_args(int argc, char **argv, unsigned long *num_items,
  * Sets r and s to the dimensions of a matrix for sorting n integers satisfying
  * the following constraints: r % s == 0, r >= 2(s-1)^2, and r - s is minimal.
  */
-int main(int argc, char * argv[]) {
+int main(int argc, char* argv[]) {
     unsigned long n;
     bool print_time, print_output;
     char *filename;
 
     #if SEQUENTIAL
+
     if (!parse_args(argc, argv, &n, NULL, &filename, &print_time,
         &print_output))
+        return 1;
+    SeqColumnSorter cs(n);
+
     #else
+
     int p;
     if (!parse_args(argc, argv, &n, &p, &filename, &print_time,
         &print_output))
-    #endif
         return 1;
-
-    #if SEQUENTIAL
-    SeqColumnSorter cs(n);
-    #else
     ParColumnSorter cs(n, p);
+
     #endif
 
     std::ifstream input_file;
