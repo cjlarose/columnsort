@@ -24,11 +24,11 @@ Matrix::~Matrix() {
     delete[] cols;
 }
 
-long& Matrix::operator()(long i, long j) const {
+inline long& Matrix::operator()(long i, long j) const {
     return at(i, j);
 }
 
-long& Matrix::at(long i, long j) const {
+inline long& Matrix::at(long i, long j) const {
     assert(i < m);
     assert(j < n);
     return *(cols[j] + i);
