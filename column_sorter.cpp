@@ -10,9 +10,7 @@ int log_base_2(unsigned long x) {
     assert(x != 0);
 
     int i = 0;
-    for (; ; i++, x >>= 1)
-        if (x & 1)
-            break;
+    for (; (x & 1) == 0; i++, x >>= 1);
     return i;
 }
 
