@@ -47,11 +47,6 @@ int parse_args(int argc, char **argv, unsigned long *num_items,
     return 1;
 }
 
-
-/*
- * Sets r and s to the dimensions of a matrix for sorting n integers satisfying
- * the following constraints: r % s == 0, r >= 2(s-1)^2, and r - s is minimal.
- */
 int main(int argc, char* argv[]) {
     unsigned long n;
     bool print_time, print_output;
