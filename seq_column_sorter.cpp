@@ -1,7 +1,7 @@
 #include "seq_column_sorter.h"
 #include "matrix.h"
 
-SeqColumnSorter::SeqColumnSorter(long n)
+SeqColumnSorter::SeqColumnSorter(unsigned long n)
     :ColumnSorter(n) {
 }
 

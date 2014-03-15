@@ -6,7 +6,7 @@
 
 class ParColumnSorter: public ColumnSorter {
     public:
-        ParColumnSorter(long s, int p);
+        ParColumnSorter(unsigned long n, int p);
         void sort();
     private:
         static void worker(Matrix& left, Matrix& right, long start, long end);

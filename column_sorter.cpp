@@ -18,7 +18,7 @@ int log_base_2(unsigned long x) {
  * Sets r and s to the dimensions of a matrix for sorting n integers satisfying
  * the following constraints: r % s == 0, r >= 2(s-1)^2, and r - s is minimal.
  */
-ColumnSorter::ColumnSorter(long n)
+ColumnSorter::ColumnSorter(unsigned long n)
     :left(Matrix()), right(Matrix()) {
     int k = log_base_2(n);
     r = 1 << (k / 2 + k % 2);
