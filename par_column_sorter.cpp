@@ -8,12 +8,18 @@ ParColumnSorter::ParColumnSorter(unsigned long n, int p)
     :ColumnSorter(n), p(p) {
 }
 
+/*
+ * Worker for a range of columns from start (inclusive) to end (exclusive)
+ */
 void ParColumnSorter::worker(Matrix& left, Matrix& right, long start, 
     long end) {
     for (long j = start; j < end; ++j)
         left.sort_column(j);
 }
 
+/*
+ * Performs column sort in parallel by assigning column ranges to threads.
+ */
 void ParColumnSorter::sort() {
     if (p > s)
         p = s;
