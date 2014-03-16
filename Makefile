@@ -9,8 +9,11 @@ OBJECTS=$(patsubst %.cpp, $(BUILD_DIR)/%.o, $(SOURCES))
 SEQ_OBJECTS=$(OBJECTS) $(BUILD_DIR)/seq_column_sorter.o
 PAR_OBJECTS=$(OBJECTS) $(BUILD_DIR)/par_column_sorter.o $(BUILD_DIR)/barrier.o
 
+.PHONY: submission
+submission: directories seq-sort par-sort
+
 .PHONY: all
-all: directories seq-sort par-sort
+all: directories seq-sort par-sort generate-testcase
 
 .PHONY: directories
 directories:
