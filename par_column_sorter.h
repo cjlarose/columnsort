@@ -10,7 +10,7 @@ class ParColumnSorter: public ColumnSorter {
         void sort();
     private:
         static void worker(Matrix& left, Matrix& right, long start, long end);
-        int p;
+        const int p;
 };
 
 #endif

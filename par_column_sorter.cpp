@@ -4,8 +4,8 @@
 #include "par_column_sorter.h"
 #include "matrix.h"
 
-ParColumnSorter::ParColumnSorter(unsigned long n, int p)
-    :ColumnSorter(n), p(p) {
+ParColumnSorter::ParColumnSorter(unsigned long n, int num_threads)
+    :ColumnSorter(n), p((num_threads > s) ? s : num_threads) {
 }
 
 /*
@@ -21,8 +21,6 @@ void ParColumnSorter::worker(Matrix& left, Matrix& right, long start,
  * Performs column sort in parallel by assigning column ranges to threads.
  */
 void ParColumnSorter::sort() {
-    if (p > s)
-        p = s;
     std::vector<std::thread> threads(p);
 
     int columns_per_thread = s / p;
