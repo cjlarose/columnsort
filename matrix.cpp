@@ -92,3 +92,7 @@ void Matrix::sort_column_shift(long j, long shift) {
     } else
         quicksort(cols[j] - shift, 0, m - 1);
 }
+
+void Matrix::sort_column_shift(long j) {
+    sort_column_shift(j, n / 2);
+}

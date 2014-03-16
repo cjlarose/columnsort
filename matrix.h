@@ -11,10 +11,11 @@ class Matrix {
         long rows() const;
         long columns() const;
         void sort_column(long j);
-        void sort_column_shift(long j, long shift);
+        void sort_column_shift(long j);
         void transpose_column(Matrix& dest, long j);
         void reverse_transpose_column(Matrix& dest, long j);
     private:
+        void sort_column_shift(long j, long shift);
         long& at(long i, long j) const;
         long** cols;
         long* elements;

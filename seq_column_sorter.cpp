@@ -53,7 +53,7 @@ void SeqColumnSorter::sort() {
     #endif
 
     for (j = 0; j < s; j++)
-        left.sort_column_shift(j, r / 2);
+        left.sort_column_shift(j);
 
     #if DEBUG
     std::cout << left;
