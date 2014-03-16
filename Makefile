@@ -12,8 +12,8 @@ all: directories seq-sort par-sort
 directories:
 	mkdir -p $(BUILD_DIR)
 
-$(BUILD_DIR)/%.o: %.cpp
-	$(CC) $(CFLAGS) -c -o $@ $^
+$(BUILD_DIR)/%.o: %.cpp %.h
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 seq-sort: $(OBJECTS) $(BUILD_DIR)/seq_column_sorter.o main.cpp
 	$(CC) $(CFLAGS) -DSEQUENTIAL -o $@ $^
