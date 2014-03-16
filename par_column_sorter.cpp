@@ -14,10 +14,35 @@ ParColumnSorter::ParColumnSorter(unsigned long n, int num_threads)
  */
 void ParColumnSorter::worker(int id, Barrier& barrier, Matrix& left,
     Matrix& right, long start, long end) {
-    for (long j = start; j < end; ++j)
+
+    long j;
+    for (j = start; j < end; ++j)
         left.sort_column(j);
 
     barrier.set_arrived(id);
+
+    for (j = start; j < end; ++j)
+        left.transpose_column(right, j);
+
+    barrier.set_arrived(id);
+
+    for (j = start; j < end; ++j)
+        right.sort_column(j);
+
+    barrier.set_arrived(id);
+
+    for (j = start; j < end; ++j)
+        right.reverse_transpose_column(left, j);
+
+    barrier.set_arrived(id);
+
+    for (j = start; j < end; ++j)
+        left.sort_column(j);
+
+    barrier.set_arrived(id);
+
+    for (j = start; j < end; ++j)
+        left.sort_column_shift(j);
 }
 
 /*
