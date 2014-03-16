@@ -12,8 +12,6 @@ Barrier::Barrier(int p)
     #endif
 }
 
-std::mutex m;
-
 std::ostream& operator<<(std::ostream& strm, const Barrier& barrier) {
     strm << "arrive: ";
     for (int i: barrier.arrive)
@@ -34,7 +32,6 @@ for j = 1 to ceiling(log(P)) {
 }
 */
 void Barrier::set_arrived(int i) {
-
     for (int j = 0; j < num_stages; ++j) {
         while (arrive[i] != -1);
         arrive[i] = j;
