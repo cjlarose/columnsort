@@ -12,7 +12,7 @@ void SeqColumnSorter::sort() {
     #endif
 
     long j;
-    for (j = 0; j < s; j++)
+    for (j = 0; j < s; ++j)
         left.sort_column(j);
 
     #if DEBUG
@@ -20,7 +20,7 @@ void SeqColumnSorter::sort() {
     std::cout << "TRANSPOSE\n";
     #endif
 
-    for (j = 0; j < s; j++)
+    for (j = 0; j < s; ++j)
         left.transpose_column(right, j);
 
     #if DEBUG
@@ -28,7 +28,7 @@ void SeqColumnSorter::sort() {
     std::cout << "SORT\n";
     #endif
 
-    for (j = 0; j < s; j++)
+    for (j = 0; j < s; ++j)
         right.sort_column(j);
 
     #if DEBUG
@@ -36,7 +36,7 @@ void SeqColumnSorter::sort() {
     std::cout << "REVERSE TRANSPOSE\n";
     #endif
 
-    for (j = 0; j < s; j++)
+    for (j = 0; j < s; ++j)
         right.reverse_transpose_column(left, j);
 
     #if DEBUG
@@ -44,7 +44,7 @@ void SeqColumnSorter::sort() {
     std::cout << "SORT\n";
     #endif
 
-    for (j = 0; j < s; j++)
+    for (j = 0; j < s; ++j)
         left.sort_column(j);
 
     #if DEBUG
@@ -52,7 +52,7 @@ void SeqColumnSorter::sort() {
     std::cout << "SHIFT SORT\n";
     #endif
 
-    for (j = 0; j < s; j++)
+    for (j = 0; j < s; ++j)
         left.sort_column_shift(j);
 
     #if DEBUG
