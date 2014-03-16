@@ -3,18 +3,21 @@
 #include <vector>
 #include "par_column_sorter.h"
 #include "matrix.h"
+#include "barrier.h"
 
 ParColumnSorter::ParColumnSorter(unsigned long n, int num_threads)
-    :ColumnSorter(n), p((num_threads > s) ? s : num_threads) {
+    :ColumnSorter(n), p((num_threads > s) ? s : num_threads), barrier(Barrier(p)) {
 }
 
 /*
  * Worker for a range of columns from start (inclusive) to end (exclusive)
  */
-void ParColumnSorter::worker(Matrix& left, Matrix& right, long start, 
-    long end) {
+void ParColumnSorter::worker(int id, Barrier& barrier, Matrix& left,
+    Matrix& right, long start, long end) {
     for (long j = start; j < end; ++j)
         left.sort_column(j);
+
+    barrier.set_arrived(id);
 }
 
 /*
@@ -35,8 +38,8 @@ void ParColumnSorter::sort() {
             << j + num_cols << "\n";
         #endif
 
-        threads[i] = std::thread(&ParColumnSorter::worker, std::ref(left),
-            std::ref(right), j, j + num_cols);
+        threads[i] = std::thread(&ParColumnSorter::worker, i, std::ref(barrier),
+            std::ref(left), std::ref(right), j, j + num_cols);
 
         j += num_cols;
     }

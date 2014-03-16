@@ -18,7 +18,7 @@ $(BUILD_DIR)/%.o: %.cpp %.h
 seq-sort: $(OBJECTS) $(BUILD_DIR)/seq_column_sorter.o main.cpp
 	$(CC) $(CFLAGS) -DSEQUENTIAL -o $@ $^
 
-par-sort: $(OBJECTS) $(BUILD_DIR)/par_column_sorter.o main.cpp
+par-sort: $(OBJECTS) $(BUILD_DIR)/par_column_sorter.o $(BUILD_DIR)/barrier.o main.cpp
 	$(CC) $(CFLAGS) -pthread -DPARALLEL -o $@ $^
 
 generate-testcase: generate_testcase.cpp
