@@ -32,21 +32,21 @@ for j = 1 to ceiling(log(P)) {
 }
 */
 void Barrier::set_arrived(int i) {
+    std::unique_lock<std::mutex> l(lock, std::defer_lock);
     for (int j = 0; j < num_stages; ++j) {
-        std::unique_lock<std::mutex> l(lock);
+        l.lock();
         arrive_cond[i].wait(l, [&, this]{return arrive[i] == -1; });
-        arrive[i] = j;
         l.unlock();
 
+        arrive[i] = j;
+        arrive_cond[i].notify_all();
 
         int look_at = (i + (1 << j)) % p;
-        std::unique_lock<std::mutex> l2(lock);
-        arrive_cond[look_at].wait(l2, [&, this]{return arrive[look_at] == j; });
+        l.lock();
+        arrive_cond[look_at].wait(l, [&, this]{return arrive[look_at] == j; });
+        l.unlock();
+
         arrive[look_at] = -1;
-        l2.unlock();
-
-
-        arrive_cond[i].notify_all();
         arrive_cond[look_at].notify_all();
     }
 }
