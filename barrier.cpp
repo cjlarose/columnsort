@@ -1,6 +1,5 @@
 #include <cmath>
 #include <iostream>
-#include <mutex>
 #include "barrier.h"
 
 Barrier::Barrier(int p)
@@ -10,6 +9,7 @@ Barrier::Barrier(int p)
     #if DEBUG
     std::cout << "num_stages = " << num_stages << "\n";
     #endif
+    arrive_cond = std::vector<std::condition_variable>(p);
 }
 
 std::ostream& operator<<(std::ostream& strm, const Barrier& barrier) {
@@ -33,10 +33,20 @@ for j = 1 to ceiling(log(P)) {
 */
 void Barrier::set_arrived(int i) {
     for (int j = 0; j < num_stages; ++j) {
-        while (arrive[i] != -1);
+        std::unique_lock<std::mutex> l(lock);
+        arrive_cond[i].wait(l, [&, this]{return arrive[i] == -1; });
         arrive[i] = j;
+        l.unlock();
+
+
         int look_at = (i + (1 << j)) % p;
-        while (arrive[look_at] != j);
+        std::unique_lock<std::mutex> l2(lock);
+        arrive_cond[look_at].wait(l2, [&, this]{return arrive[look_at] == j; });
         arrive[look_at] = -1;
+        l2.unlock();
+
+
+        arrive_cond[i].notify_all();
+        arrive_cond[look_at].notify_all();
     }
 }
