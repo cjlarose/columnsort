@@ -19,7 +19,7 @@ all: directories seq-sort par-sort generate-testcase
 directories:
 	mkdir -p $(BUILD_DIR)
 
-$(BUILD_DIR)/%.o: %.cpp %.h
+$(BUILD_DIR)/%.o: %.cpp %.h Makefile
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 seq-sort: $(SEQ_OBJECTS) main.cpp
