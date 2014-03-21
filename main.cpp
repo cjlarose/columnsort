@@ -1,6 +1,8 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <cstdlib>
+#include <sys/time.h>
 #include "seq_column_sorter.h"
 #include "par_column_sorter.h"
 
@@ -74,7 +76,16 @@ int main(int argc, char* argv[]) {
     input_file >> cs;
     input_file.close();
 
+    struct timeval start, stop;
+    gettimeofday(&start, NULL);
     cs.sort();
+    gettimeofday(&stop, NULL);
+
+    if (print_time) {
+        double elapsed = (double) (stop.tv_sec - start.tv_sec)
+            + (double) (stop.tv_usec - start.tv_usec) / 1000000.0;
+        std::cout << std::setprecision(4) << elapsed << "\n";
+    }
 
     if (print_output)
         std::cout << cs;
