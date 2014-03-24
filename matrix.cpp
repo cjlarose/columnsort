@@ -24,7 +24,7 @@ Matrix::~Matrix() {
     delete[] cols;
 }
 
-inline long& Matrix::operator()(long i, long j) const {
+long& Matrix::operator()(long i, long j) const {
     return at(i, j);
 }
 

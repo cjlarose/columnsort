@@ -29,7 +29,10 @@ ColumnSorter::ColumnSorter(unsigned long n)
 }
 
 std::ostream& operator<<(std::ostream& strm, const ColumnSorter& cs) {
-    return strm << cs.left;
+    for (long j = 0; j < cs.left.columns(); ++j)
+        for (long i = 0; i < cs.left.rows(); ++i)
+            strm << cs.left(i, j) << "\n";
+    return strm;
 }
 
 std::istream& operator>>(std::istream& strm, const ColumnSorter& cs) {
