@@ -94,5 +94,5 @@ void Matrix::sort_column_shift(long j, long shift) {
 }
 
 void Matrix::sort_column_shift(long j) {
-    sort_column_shift(j, n / 2);
+    sort_column_shift(j, m / 2);
 }
