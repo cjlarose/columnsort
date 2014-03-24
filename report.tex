@@ -1,0 +1,55 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\title{CSc 422 Program 1: Columnsort}
+
+\author{Chris LaRose}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+Leighton's Columnsort\cite{leighton} sorts a list of numbers by arranging them into a matrix of a particular size and performing a sequence of matrix operations on it. When complete, the matrix stores the sorted list of numbers in column-major order. I wrote two implementations of the algorithm, one sequential, and one parallel and timed their executions on a series of input sizes.
+
+\section{Results}
+
+I timed my implementations with input sizes of powers of two $2^{16} < n < 2^{26}$. Smaller inputs are too fast to be significant. Times do not include initialization phases (such as reading the input into the matrix). In the parallel implementation, timing includes thread creation and synchronization overhead. All reported results are the median of three trials on a machine with an Intel\copyright Core\texttrademark i7-3770 quad-core processor clocked at 3.40GHz, with two logical cores per physical one. I timed my parallel implementation with $p \in \{2,4,8\}$ cores on the same input sizes. Times are reported in seconds.
+
+\begin{tabular}{ l l l l l l }
+  n & Sequential & 2 cores (Speedup) & 4 cores (Speedup) & 8 cores (Speedup) \\  
+  $2^{16}$ & 0.010 & 0.011 (0.909) & 0.009 (1.111) & 0.003 (3.333) \\
+  $2^{17}$ & 0.021 & 0.018 (1.167) & 0.013 (1.615) & 0.005 (4.2)   \\
+  $2^{18}$ & 0.042 & 0.029 (1.448) & 0.028 (1.5)   & 0.015 (2.8)   \\
+  $2^{19}$ & 0.089 & 0.049 (1.816) & 0.040 (2.225) & 0.018 (4.944) \\
+  $2^{20}$ & 0.181 & 0.098 (1.847) & 0.069 (2.623) & 0.036 (5.028) \\
+  $2^{21}$ & 0.371 & 0.191 (1.942) & 0.117 (3.171) & 0.074 (5.014) \\
+  $2^{22}$ & 0.782 & 0.402 (1.945) & 0.223 (3.507) & 0.154 (5.078) \\
+  $2^{23}$ & 1.617 & 0.828 (1.953) & 0.458 (3.531) & 0.339 (4.770) \\
+  $2^{24}$ & 3.288 & 1.657 (1.984) & 0.897 (3.667) & 0.669 (4.915) \\
+  $2^{25}$ & 13.560 & 6.615 (2.050)  & 3.502 (3.872)  & 3.045 (4.453)  \\
+  $2^{26}$ & 44.251 & 20.015 (2.101) & 10.733 (4.123) & 12.486 (3.544) \\
+\end{tabular}
+
+\section{Conclusions}
+
+I expected, as in many parallel programs, that the parallel implemention would be slower than the sequential one for small inputs. This is probably true, but with my method of reporting time, one-thousanth second resolution, it was not easy to find a input whose time was nonzero and where the parallel implementation provided speeded $<1$ (with the exception of 2 cores on $2^{16}$ as above). 
+
+Speedup increases as the number of cores increases as expected. As the input size increases, speedup approaches perfect speedup ($p$) for 2 and 4 cores, but not for 8. This is expected because the machine I tested on had only four physical cores.
+
+
+\begin{thebibliography}{9}
+
+\bibitem{leighton}
+  F. T. Leighton,
+  \emph{Introduction to Parallel Algorithms and Architectures: Arrays, Trees, and Hypercubes}.
+  San Manteo, Calif.: Morgan Kaufman. 1992.
+
+\end{thebibliography}
+
+
+\end{document}
