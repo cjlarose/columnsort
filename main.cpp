@@ -84,7 +84,7 @@ int main(int argc, char* argv[]) {
     if (print_time) {
         double elapsed = (double) (stop.tv_sec - start.tv_sec)
             + (double) (stop.tv_usec - start.tv_usec) / 1000000.0;
-        std::cout << std::setprecision(4) << elapsed << "\n";
+        std::cout << std::setprecision(3) << std::fixed << elapsed << "\n";
     }
 
     if (print_output)
