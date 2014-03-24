@@ -39,7 +39,6 @@ void Barrier::set_arrived(int i) {
         l.unlock();
 
         arrive[i] = j;
-        arrive_cond[i].notify_all();
 
         int look_at = (i + (1 << j)) % p;
         l.lock();
@@ -47,6 +46,7 @@ void Barrier::set_arrived(int i) {
         l.unlock();
 
         arrive[look_at] = -1;
+        arrive_cond[i].notify_all();
         arrive_cond[look_at].notify_all();
     }
 }
