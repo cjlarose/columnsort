@@ -73,6 +73,10 @@ int main(int argc, char* argv[]) {
 
     std::ifstream input_file;
     input_file.open(filename);
+    if (input_file.fail()) {
+        std::cerr << "Unable to open file " << filename << std::endl;
+        return 1;
+    }
     input_file >> cs;
     input_file.close();
 
