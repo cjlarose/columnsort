@@ -18,7 +18,7 @@ Leighton's Columnsort\cite{leighton} sorts a list of numbers by arranging them i
 
 \section{Results}
 
-I timed my implementations with input sizes of powers of two $2^{16} < n < 2^{26}$. Smaller inputs are too fast to be significant. Times do not include initialization phases (such as reading the input into the matrix). In the parallel implementation, timing includes thread creation and synchronization overhead. All reported results are the median of three trials on a machine with an Intel\copyright Core\texttrademark i7-3770 quad-core processor clocked at 3.40GHz, with two logical cores per physical one. I timed my parallel implementation with $p \in \{2,4,8\}$ cores on the same input sizes. Times are reported in seconds.
+I timed my implementations with input sizes of powers of two $2^{16} \leq n \leq 2^{28}$. Smaller inputs are too fast to be significant. Times do not include initialization phases (such as reading the input into the matrix). In the parallel implementation, timing includes thread creation and synchronization overhead. All reported results are the median of three trials on a machine with an Intel\copyright Core\texttrademark i7-3770 quad-core processor clocked at 3.40GHz, with two logical cores per physical one. I timed my parallel implementation with $p \in \{2,4,8\}$ cores on the same input sizes. Times are reported in seconds.
 
 \begin{tabular}{ l l l l l l }
   n & Sequential & 2 cores (Speedup) & 4 cores (Speedup) & 8 cores (Speedup) \\  
@@ -31,8 +31,10 @@ I timed my implementations with input sizes of powers of two $2^{16} < n < 2^{26
   $2^{22}$ & 0.782 & 0.402 (1.945) & 0.223 (3.507) & 0.154 (5.078) \\
   $2^{23}$ & 1.617 & 0.828 (1.953) & 0.458 (3.531) & 0.339 (4.770) \\
   $2^{24}$ & 3.288 & 1.657 (1.984) & 0.897 (3.667) & 0.669 (4.915) \\
-  $2^{25}$ & 13.560 & 6.615 (2.050)  & 3.502 (3.872)  & 3.045 (4.453)  \\
-  $2^{26}$ & 44.251 & 20.015 (2.101) & 10.733 (4.123) & 12.486 (3.544) \\
+  $2^{25}$ & 7.018 & 3.509 (2.000) & 1.879 (3.735) & 1.397 (5.024) \\
+  $2^{26}$ & 14.274 & 7.110 (2.008) & 3.801 (3.755) & 2.826 (5.051) \\
+  $2^{27}$ & 28.908 & 14.422 (2.004) & 7.762 (3.724) & 5.794 (4.989) \\
+  $2^{28}$ & 62.266 & 30.835 (2.019) & 16.510 (3.771) & 12.718 (4.896) \\
 \end{tabular}
 
 \section{Conclusions}
